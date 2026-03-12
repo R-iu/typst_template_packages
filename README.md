@@ -52,7 +52,7 @@ Adjust the version or imported symbols as needed for your document.
 
 The assignment template provides a document layout and helpers for typed assignments.
 
-![Assignment template preview](assignment-preview.png)
+![Assignment template preview](./assets/assignment-preview.png)
 
 **Page**
 
