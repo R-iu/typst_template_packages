@@ -50,7 +50,7 @@ Adjust the version or imported symbols as needed for your document.
 
 ## Template display
 
-The assignment template provides a document layout and helpers for typed assignments.
+The assignment template provides a document layout and helpers for typed assignments, plotting, and small linear-algebra demos.
 
 ![Assignment template preview](./assets/assignment-preview.png)
 
@@ -72,10 +72,13 @@ The assignment template provides a document layout and helpers for typed assignm
 - Base font: New Computer Modern, 11 pt
 - Use `#problem[Title]` and `#subproblem[Title]` for auto-numbered problems and (a), (b), …
 - Use `#quick_plot(...)` and `#multi_plot(...)` for inline plots (via CeTZ).
+- Use the matrix helpers from `lib.typ` (`mat_add`, `mat_sub`, `mat_mul`, `mat_transpose`, `mat_inv_2x2`, etc.) to perform basic matrix operations inside your solutions.
+- Use `matrix_step(..)` to both **compute** and **display** a step-by-step matrix equation, returning structured data and a nicely formatted math equation.
 
 **Template files**
 
 - Compile `template/main.typ` to build a document. It uses `info.typ` for your personal metadata (author, student ID, course, optional date); edit `info.typ` (or a copy like `info.typ.example`) with your details.
+- The template’s quick-start prompt at the top of `main.typ` shows example usage of `problem`, `subproblem`, plotting helpers, and can be extended with matrix examples using `matrix_step`.
 
 ## License
 
