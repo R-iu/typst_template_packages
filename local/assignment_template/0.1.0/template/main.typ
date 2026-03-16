@@ -28,8 +28,9 @@
   [
     #text(12pt, weight: "bold")[How to use this template]
 
-    • Use `#problem[Title]` and `#subproblem[Title]` for automatic numbering \
-    • Plots: `#quick_plot(...)` or `#multi_plot(...)` (see examples below)
+    • Structure: use `#problem[Title]` and `#subproblem[Title]` for automatic numbering. \
+    • Plots: `#quick_plot(...)` or `#multi_plot(...)` (see examples below). \
+    • Matrices: use helpers like `mat_add`, `mat_sub`, `mat_mul`, `mat_transpose`, `mat_inv_2x2`, and `matrix_step` for worked linear-algebra steps.
 
     #quick_plot(
       ((0, 0), (1, 2), (2, 3), (3, 5)),
@@ -45,6 +46,12 @@
       line: "spline",
       caption: [Example of multi_plot],
     )
+
+    // Example: matrix_step usage (2×2 multiplication)
+    #let A = ((1, 2), (3, 4))
+    #let B = ((2, 0), (1, 2))
+    #let final = matrix_step(B, m2: A, op: "*", n1: $B$, n2: $A$, target: $X$)
+    $ final.content $
 
     #text(9pt, gray)[Delete this entire block once you're comfortable.]
   ],
