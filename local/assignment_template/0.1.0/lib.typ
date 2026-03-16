@@ -24,7 +24,7 @@
 #let subproblem(title) = {
   counter("subproblem").step()
   block(below: 0.8em, above: 1.2em)[
-    #set text(11pt, weight: "medium")
+    #set text(11pt, weight: "bold")
     #context counter("subproblem").display("(a)") #title
   ]
 }
