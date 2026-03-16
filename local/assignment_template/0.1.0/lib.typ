@@ -13,7 +13,7 @@
   counter("subproblem").update(0)
   counter("problem").step()
   block(width: 100%, below: 1em, above: 1.5em)[
-    #set text(12pt, weight: "bold")
+    #set text(1.4em, weight: "bold")
     Problem #context counter("problem").display(): #title
   ]
 }
@@ -24,7 +24,7 @@
 #let subproblem(title) = {
   counter("subproblem").step()
   block(below: 0.8em, above: 1.2em)[
-    #set text(11pt, weight: "bold")
+    #set text(1.2em, weight: "bold")
     #context counter("subproblem").display("(a)") #title #linebreak()
   ]
 }
