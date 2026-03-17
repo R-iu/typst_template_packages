@@ -50,8 +50,25 @@
     // Example: matrix_step usage (2×2 multiplication)
     #let A = ((1, 2), (3, 4))
     #let B = ((2, 0), (1, 2))
-    #let final = matrix_step(B, m2: A, op: "*", n1: $B$, n2: $A$, target: $X$)
-    $ final.content $
+
+    // Short form: use defaults (A·B, C = A B)
+    #let step-default = matrix_step(A, m2: B)
+    $ #step-default.content $
+
+    // Custom labels/order and rounding
+    #let step-custom = matrix_step(
+      B,
+      m2: A,
+      op: "*",
+      n1: $B$,
+      n2: $A$,
+      target: $X$,
+      dp: 3,
+    )
+    $ #step-custom.content $
+
+    // You can also reuse the numeric result:
+    #let X = step-custom.data
 
     #text(9pt, gray)[Delete this entire block once you're comfortable.]
   ],
