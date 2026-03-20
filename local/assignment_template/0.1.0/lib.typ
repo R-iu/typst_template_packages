@@ -215,23 +215,30 @@
   k: none,
   dp: 4,
 ) = {
-  let raw_res = if op == "+" { mat_add(m1, m2) }
-  else if op == "-" { mat_sub(m1, m2) }
-  else if op == "*" or op == "" { mat_mul(m1, m2)}
-  else if op == "scale" { mat_scale(k, m1) }
-  else if op == "transpose" or op == "T" { mat_transpose(m1) }
-  else if op == "inv" { mat_inv_2x2(m1) }
-
-  else if op == "relu" { mat_apply(m1, v => relu(v, dp: dp)) }
-  else if op == "sigmoid" {mat_apply(m1, v => sigmoid(v, dp: dp)) }
-  else if op == "softmax" { mat_softmax(m1, dp: dp) }
-
-  else if op in ("sinh", "cosh", "tanh") {
-    let f = if op == "sinh" { calc.sinh } 
-    else if op == "cosh" { calc.cosh } 
-    else { calc.tanh }
+  let raw_res = if op == "+" {
+    mat_add(m1, m2) 
+  } else if op == "-" {
+    mat_sub(m1, m2) 
+  } else if op == "*" or op == "" {
+    mat_mul(m1, m2)
+  } else if op == "scale" {
+    mat_scale(k, m1) 
+  } else if op == "transpose" or op == "T" {
+    mat_transpose(m1) 
+  } else if ( op == "inv") {
+    mat_inv_2x2(m1) 
+  } else if op == "relu" { 
+    mat_apply(m1, v => relu(v, dp: dp)) 
+  } else if op == "sigmoid" {
+    mat_apply(m1, v => sigmoid(v, dp: dp))
+  } else if op == "softmax" {
+    mat_softmax(m1, dp: dp) 
+  } else if op in ("sinh", "cosh", "tanh") {
+    let f = if op == "sinh" { calc.sinh } else if op == "cosh" { calc.cosh } else { calc.tanh }
     mat_apply(m1, f)
-  } else { panic("Unsupported operation") }
+  } else { 
+    panic("Unsupported operation: " + op)
+  }
 
   let res = round_mat(raw_res, dp: dp)
   let m1_rounded = round_mat(m1, dp: dp)
@@ -274,6 +281,7 @@
   body,
 ) = {
   let display-date = if date == none { datetime.today().display() } else { date }
+  let author-display = author.replace(", ", "\n").replace(",", "\n")
 
   set page(
     paper: "a4",
@@ -290,11 +298,18 @@
       #text(16pt, weight: "bold")[#title] \
       #text(12pt, gray)[#course]
     ],
-    align(right)[
-      #text(11pt)[*#author*] \
-      #text(11pt)[ID: #student-id] \
-      #text(10pt, style: "italic")[#display-date]
-    ],
+    if student-id != none {
+      align(right)[
+        #text(11pt)[*#author-display*] \
+        #text(11pt)[ID: #student-id] \
+        #text(10pt, style: "italic")[#display-date]
+      ]
+    } else {
+      align(right)[
+        #text(11pt)[*#author-display*] \
+        #text(10pt, style: "italic")[#display-date]
+      ]
+    },
   )
 
   line(length: 100%, stroke: 0.5pt + gray)
