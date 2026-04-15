@@ -1,9 +1,6 @@
 // === External packages & configuration ===
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.3": chart, plot
-#import "@preview/codly:1.3.0": *
-#import "@preview/codly-languages:0.1.1": *
-#show: codly-init.with()
 
 #import "info.typ": assignment_author, assignment_student_id
 
@@ -23,6 +20,7 @@
 /// Numbered subproblem within the current problem, labeled (a), (b), etc.
 /// - *title*: Heading text for the subproblem.
 #let subproblem(title) = {
+  v(1em)
   counter("subproblem").step()
   block(below: 0.8em, above: 1.2em)[
     #set text(1.2em, weight: "bold")
@@ -216,27 +214,27 @@
   dp: 4,
 ) = {
   let raw_res = if op == "+" {
-    mat_add(m1, m2) 
+    mat_add(m1, m2)
   } else if op == "-" {
-    mat_sub(m1, m2) 
+    mat_sub(m1, m2)
   } else if op == "*" or op == "" {
     mat_mul(m1, m2)
   } else if op == "scale" {
-    mat_scale(k, m1) 
+    mat_scale(k, m1)
   } else if op == "transpose" or op == "T" {
-    mat_transpose(m1) 
-  } else if ( op == "inv") {
-    mat_inv_2x2(m1) 
-  } else if op == "relu" { 
-    mat_apply(m1, v => relu(v, dp: dp)) 
+    mat_transpose(m1)
+  } else if (op == "inv") {
+    mat_inv_2x2(m1)
+  } else if op == "relu" {
+    mat_apply(m1, v => relu(v, dp: dp))
   } else if op == "sigmoid" {
     mat_apply(m1, v => sigmoid(v, dp: dp))
   } else if op == "softmax" {
-    mat_softmax(m1, dp: dp) 
+    mat_softmax(m1, dp: dp)
   } else if op in ("sinh", "cosh", "tanh") {
     let f = if op == "sinh" { calc.sinh } else if op == "cosh" { calc.cosh } else { calc.tanh }
     mat_apply(m1, f)
-  } else { 
+  } else {
     panic("Unsupported operation: " + op)
   }
 
@@ -263,7 +261,7 @@
       $italic("softmax")$
     } else { math.op(op) }
     // Shows: Target = f(n1) = f(Mat) = (f(x1)...) = Result
-    $ #target = #f_sym (#n1) = #f_sym #show_mat(m1_rounded) = #show_mat(res) $
+    $ #target = #f_sym (#n1) = #show_mat(res) $
   }
 
   return (content: equation, data: res)
